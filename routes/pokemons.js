@@ -13,7 +13,6 @@ router.get('/', (_req, res) => {
 
             pokemon.capturadosEm = `${dataEmPedacos[2]}/${dataEmPedacos[1]}/${dataEmPedacos[0]}`;
         });
-
         res.render('paginas/pokemons/index', {
             pokemons,
         });

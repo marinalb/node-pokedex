@@ -98,25 +98,14 @@
           <div
             class="progress-bar bg-success"
             role="progressbar"
-            aria-valuenow="<%= estatisticas['speed'] %>"
+            aria-valuenow="<%= jogos %>"
             aria-valuemin="0"
             aria-valuemax="180"
-            style.width="<%= (estatisticas['speed'] / 180) * 100 %>%"
             >
-            <%= estatisticas['speed'] %>
+            <%= jogos %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<% if (locals.jogos) { %>
-  <p class="text-center"><b>Jogos que aparece: </b>
-    <% jogos.forEach((jogo) => { %>
-      <span class="badge bg-info text-dark"><%= jogo %></span>
-    <% }) %>
-    <% if (jogos.length === 0) { %>
-      <span class="badge bg-danger text-dark">Nenhum :(</span>
-    <% } %>
-  </p>
-<% } %>
