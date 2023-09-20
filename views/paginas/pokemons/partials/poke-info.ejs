@@ -110,13 +110,3 @@
     </div>
   </div>
 </div>
-<% if (locals.jogos) { %>
-  <p class="text-center"><b>Jogos que aparece: </b>
-    <% jogos.forEach((jogo) => { %>
-      <span class="badge bg-info text-dark"><%= jogo %></span>
-    <% }) %>
-    <% if (jogos.length === 0) { %>
-      <span class="badge bg-danger text-dark">Nenhum :(</span>
-    <% } %>
-  </p>
-<% } %>

@@ -13,13 +13,12 @@ const buscaInfoPokemon = (pokeId) => {
         const peso = data.weight;
         const imagem = data.sprites.other['official-artwork'].front_default;
         const ataques = data.abilities.map(a => a.ability.name).join(', ');
-
-        const gameIndices = {};
+        const jogos = {};
 
         const estatisticas = {};
 
         data.game_indices.forEach((gameIndice) => {
-            gameIndices[gameIndice.version.name] = gameIndice.game_index;
+            jogos[gameIndice.version.name] = gameIndice.id;
 
             });
 
@@ -35,7 +34,7 @@ const buscaInfoPokemon = (pokeId) => {
                 peso,
                 imagem,
                 ataques,
-                gameIndices,
+                jogos,
                 estatisticas,
             })
         }).catch((e) => reject(e));
