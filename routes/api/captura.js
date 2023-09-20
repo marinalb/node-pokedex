@@ -5,7 +5,7 @@ const { Pokemon } = require('../../models');
 
 const router = express.Router();
 
-router.post('/captura/:id', (req, res) => {
+router.post('/:id', (req, res) => {
         buscaInfoPokemon(req.params.id).then((pokemon) => {
             const pokemonFoiCapturado = true;
 
