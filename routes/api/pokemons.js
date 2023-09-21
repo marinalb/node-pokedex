@@ -20,17 +20,14 @@ router.post('/', async (req, res) => {
 });
 
 //Read - CRUD
-router.get('/', async (req, res) => {
+router.get('/:altura', async (req, res) => {
     try {
-        const filtros = req.query;
+        const filtros = req.params;
         const options = {};
 
-        if (filtros.nomeComecaCom) {
-            options.nome = {
-                $regex: filtros.nomeComecaCom + '.*',
-            };
+        if (filtros > Pokemon.altura) {
+            options = options.altura;
         }
-
         const pokemons = await Pokemon.find(options);
         res.status(200).json({
             sucesso: true,
@@ -40,6 +37,46 @@ router.get('/', async (req, res) => {
         res.status(500).json({
             sucesso: false,
             erro: e,
+        })
+    }
+});
+
+//Read Height MIN - CRUD - ALTURA
+router.get('/:altura', async (req, res) => {
+   
+    try {  
+       const pokemon = await Pokemon.find({ 
+            altura: req.params.altura, 
+        
+        });
+        res.json({
+            sucesso: true,
+            pokemon: pokemon,
+        })
+    } catch {
+        res.status(404).json({
+            sucesso: false,
+            erro: 'Pokemon NOT found!',
+        })
+    }
+});
+
+//Read WEIGHT MIN - CRUD - PESO
+router.get('/:peso', async (req, res) => {
+   
+    try {  
+       const pokemon = await Pokemon.find({ 
+            peso: req.params.peso, 
+        
+        });
+        res.json({
+            sucesso: true,
+            pokemon: pokemon,
+        })
+    } catch {
+        res.status(404).json({
+            sucesso: false,
+            erro: 'Pokemon NOT found!',
         })
     }
 });
@@ -77,6 +114,21 @@ router.patch('/:id', async (req, res) => {
         res.status(422).json({
             sucesso: false,
             erro: e,
+        })
+    }
+});
+
+//Delete - CRUD
+router.delete('/:id', async (req, res) => {
+    try {
+        const pokemon = await Pokemon.findOneAndDelete({ _id: req.params.id });
+        res.json({
+            sucesso: true
+        })
+    } catch {
+        res.status(404).json({
+            sucesso: false,
+            erro: 'Pokemon NOT found!',
         })
     }
 });
