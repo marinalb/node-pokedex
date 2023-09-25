@@ -2,7 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (_req, res) => {
+const middleware = (req, res, next) => {
+  console.log("I have access to req");
+
+  next();
+};
+
+router.get('/', middleware, (_req, res) => {
     res.json({
         status: "ok",
     });

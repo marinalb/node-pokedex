@@ -20,13 +20,15 @@ router.post('/', async (req, res) => {
 });
 
 //Read - CRUD
-router.get('/:altura', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const filtros = req.params;
+        const filtros = req.query;
         const options = {};
 
-        if (filtros > Pokemon.altura) {
-            options = options.altura;
+        if (filtros.nomeComecaCom) {
+            options.nome = {
+                $regex: filtros.nomeComecaCom + '.*',
+            };
         }
         const pokemons = await Pokemon.find(options);
         res.status(200).json({
@@ -41,14 +43,14 @@ router.get('/:altura', async (req, res) => {
     }
 });
 
-//Read Height MIN - CRUD - ALTURA
-router.get('/:altura', async (req, res) => {
+//Read Height MIN - CRUD - ALTURA MINUMA
+router.get('/alt/:altura', async (req, res) => {
    
     try {  
        const pokemon = await Pokemon.find({ 
-            altura: req.params.altura, 
-        
-        });
+           altura: {
+            $gte:req.params.altura
+        }});
         res.json({
             sucesso: true,
             pokemon: pokemon,
@@ -61,14 +63,14 @@ router.get('/:altura', async (req, res) => {
     }
 });
 
-//Read WEIGHT MIN - CRUD - PESO
-router.get('/:peso', async (req, res) => {
+//Read WEIGHT MIN - CRUD - PESO MINUMO
+router.get('/peso/:peso', async (req, res) => {
    
     try {  
        const pokemon = await Pokemon.find({ 
-            peso: req.params.peso, 
-        
-        });
+        peso: {
+            $gte:req.params.peso
+        }});
         res.json({
             sucesso: true,
             pokemon: pokemon,
