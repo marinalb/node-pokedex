@@ -6,7 +6,12 @@ const router = express.Router();
 // Create - CRUD
 router.post('/', async (req, res) => {
     try {
-        const pokemon = await Pokemon.create(req.body);
+        const pokemon = await Pokemon.create({
+            ...req.body,
+            ...{
+                capturadoPor: req.usuario._id
+            }
+        });
         res.status(201).json({
             sucesso: true,
             pokemon: pokemon,
@@ -30,6 +35,8 @@ router.get('/', async (req, res) => {
                 $regex: filtros.nomeComecaCom + '.*',
             };
         }
+        options.capturadoPor = req.usuario._id;
+
         const pokemons = await Pokemon.find(options);
         res.status(200).json({
             sucesso: true,
@@ -86,7 +93,10 @@ router.get('/peso/:peso', async (req, res) => {
 //Read ID - CRUD
 router.get('/:id', async (req, res) => {
     try {
-        const pokemon = await Pokemon.findOne({ _id: req.params.id });
+        const pokemon = await Pokemon.findOne({ 
+            _id: req.params.id,
+            capturadoPor: req.usuario._id, 
+        });
         res.json({
             sucesso: true,
             pokemon: pokemon,
@@ -102,7 +112,10 @@ router.get('/:id', async (req, res) => {
 //Update - CRUD
 router.patch('/:id', async (req, res) => {
     try {
-        const pokemon = await Pokemon.findOne({_id: req.params.id});
+        const pokemon = await Pokemon.findOne({
+            _id: req.params.id,
+            //capturadoPor: req.usuario._id, 
+        });
 
         Object.keys(req.body).forEach((atributo) => {
             pokemon[atributo] = req.body[atributo];

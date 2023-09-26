@@ -1,7 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const { connect, Pokemon } = require('./models');
+const { connect, Pokemon, Usuario } = require('./models');
 
 const populaBancoDeDados = async () => {
     connect();
@@ -19,7 +20,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 50,
             'special-defense': 64,
             speed: 43
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 143,
@@ -35,7 +37,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 65,
             'special-defense': 110,
             speed: 30
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 175,
@@ -51,7 +54,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 40,
             'special-defense': 65,
             speed: 20
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 152,
@@ -67,7 +71,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 49,
             'special-defense': 65,
             speed: 45
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 81,
@@ -83,7 +88,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 95,
             'special-defense': 55,
             speed: 45
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 54,
@@ -99,7 +105,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 65,
             'special-defense': 50,
             speed: 55
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 150,
@@ -115,7 +122,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 155,
             'special-defense': 90,
             speed: 130
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 155,
@@ -131,7 +139,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 60,
             'special-defense': 50,
             speed: 65
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 39,
@@ -147,7 +156,8 @@ const populaBancoDeDados = async () => {
             'special-attack': 45,
             'special-defense': 25,
             speed: 20
-        }
+        },
+        jogos: {}
     });
     await Pokemon.create({
         id: 42,
@@ -163,7 +173,14 @@ const populaBancoDeDados = async () => {
             'special-attack': 65,
             'special-defense': 75,
             speed: 90
-        }
+        },
+        jogos: {}
+    });
+
+    await Usuario.create({
+        email: 'test2@uol.com',
+        nome: 'UserTest2',
+        senha: await bcrypt.hash('senha@123', 10),
     });
     await mongoose.disconnect();
 };
