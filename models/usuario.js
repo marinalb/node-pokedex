@@ -8,7 +8,7 @@ const Usuario = new Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: false,
         min: 5,
         unique: true,
         validate: {
@@ -23,6 +23,10 @@ const Usuario = new Schema({
         required: true
     },
     googleUsuarioId: {
+        type: String,
+        required: false,
+    },
+    gitUsuarioId: {
         type: String,
         required: false,
     },
