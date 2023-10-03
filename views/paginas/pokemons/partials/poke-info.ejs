@@ -38,7 +38,7 @@
             aria-valuenow="<%= estatisticas['attack'] %>"
             aria-valuemin="0"
             aria-valuemax="180"
-            style.width="<%= (estatisticas['attack'] / 180) * 100 %>%"
+            style.width=" <%= (estatisticas['attack'] / 180) * 100 %>%"
             >
             <%= estatisticas['attack'] %>
           </div>
@@ -80,7 +80,7 @@
             aria-valuenow="<%= estatisticas['speed'] %>"
             aria-valuemin="0"
             aria-valuemax="180"
-            style.width="<%= (estatisticas['speed'] / 180) * 100 %>%"
+            style.width="" <%= (estatisticas['speed'] / 180) * 100 %>%"
             >
             <%= estatisticas['speed'] %>
           </div>
@@ -88,24 +88,14 @@
       </div>
     </div>
   </div>
-  <div class="info">
-    <div class="row">
-      <div class="col-4">
-        <p class="label text-center">Game Indice: </p>
-      </div>
-      <div class="col-8">
-        <div class="progress">
-          <div
-            class="progress-bar bg-success"
-            role="progressbar"
-            aria-valuenow="<%= jogos %>"
-            aria-valuemin="0"
-            aria-valuemax="180"
-            >
-            <%= jogos %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+<% if (locals.jogos) { %>
+  <p class="text-center"><b>Jogos em que aparece: </b>
+    <% jogos.forEach((jogo) => { %>
+      <span class="badge bg-info text-dark"><%= jogo %></span>
+    <% }) %>
+    <% if (jogos.length === 0) { %>
+      <span class="badge bg-danger text-dark">Nenhum :(</span>
+    <% } %>
+  </p>
+<% } %>
